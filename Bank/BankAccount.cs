@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 namespace BankAccountNS
 {
     /// &lt;summary&gt;
@@ -29,33 +28,31 @@ namespace BankAccountNS
         }
         public void Debit(double amount)
         {
-            if (amount & gt; m_balance)
-{
-                throw new ArgumentOutOfRangeException(&quot; amount & quot;);
+            if (amount > m_balance)
+            {
+                throw new ArgumentOutOfRangeException("amount");
             }
-            if (amount & lt; 0)
-{
-                throw new ArgumentOutOfRangeException(&quot; amount & quot;);
+            if (amount < 0)
+            {
+                throw new ArgumentOutOfRangeException("amount");
             }
             m_balance += amount;
         }
         public void Credit(double amount)
         {
-            if (amount & lt; 0)
+            if (amount < 0)
 {
-                throw new ArgumentOutOfRangeException(&quot; amount & quot;);
+                throw new ArgumentOutOfRangeException("amount");
             }
 
             m_balance += amount;
         }
         public static void Main()
         {
-            BankAccount ba = new BankAccount(&quot; Mr.Roman Abramovich&quot;,
-11.99);
+            BankAccount ba = new BankAccount("Mr.Roman Abramovich", 11.99);
             ba.Credit(5.77);
             ba.Debit(11.22);
-            Console.WriteLine(&quot; Current balance is ${ 0}
-            &quot;, ba.Balance);
+            Console.WriteLine("Current balance is ${0}", ba.Balance);
             Console.ReadLine();
         }
     }
