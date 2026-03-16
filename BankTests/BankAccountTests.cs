@@ -31,8 +31,9 @@ namespace BankTests
             double debitAmount = 100.00;
             BankAccount account = new BankAccount("Mr.Roman Abramovich", beginningBalance);
             // Act and assert
-            Assert.ThrowsException<System.ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => account.Debit(debitAmount));
         }
+
         [TestMethod]
         public void Debit_WhenAmountIsMoreThanBalance_ShouldThrowArgumentOutOfRange()
         {
@@ -46,7 +47,7 @@ namespace BankTests
             {
                 account.Debit(debitAmount);
             }
-            catch (System.ArgumentOutOfRangeException e)
+            catch (ArgumentOutOfRangeException e)
             {
                 // Assert
                 StringAssert.Contains(e.Message, BankAccount.DebitAmountExceedsBalanceMessage);
@@ -56,7 +57,25 @@ namespace BankTests
             Assert.Fail("The expected exception was not thrown.");
         }
 
+        [TestMethod]
+        public void Credit_WhenBalanceLessThan0_ShouldThrowArgumentOutOfRange()
+        {
+            // Arrange
+            double beginningBalance = 0;
+            double creditAmount = -200;
+            BankAccount account = new BankAccount("Mr. Bin", beginningBalance);
+            // Act
+            try
+            {
+                account.Credit(creditAmount);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                StringAssert.Contains(e.Message, BankAccount.CreditAmountLessThanZeroMessage);
+                return;
+            }
 
-
+            Assert.Fail("The expected exception was not thrown.");
+        }
     }
 }

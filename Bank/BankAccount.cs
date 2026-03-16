@@ -12,6 +12,7 @@ namespace BankAccountNS
     {
         public const string DebitAmountExceedsBalanceMessage = "Debit amount exceeds balance";
         public const string DebitAmountLessThanZeroMessage = "Debit amount is less than zero";
+        public const string CreditAmountLessThanZeroMessage = "Credit amount is less than zero";
         /// <summary>
         /// Класс, который представляет простой банковсий счет, основными методами которого являются снятие и пополнение счета
         /// </summary>
@@ -59,7 +60,7 @@ namespace BankAccountNS
         {
             if (amount < 0)
 {
-                throw new ArgumentOutOfRangeException("amount");
+                throw new ArgumentOutOfRangeException("amount", amount, CreditAmountLessThanZeroMessage);
             }
 
             m_balance += amount;
